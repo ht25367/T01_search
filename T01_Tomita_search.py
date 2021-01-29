@@ -13,10 +13,15 @@ def read_source():
 		
 		# date = source_csv.read()
 		data = csv.reader( source_csv )
-		for row in data:
-			pass
-		print("「csv読み込み関数」から読み込んだリストを返します")
-		return row
+		header = next(data)
+		
+		
+		# ！今回のcsvファイルが1行しかないため！？
+		#  for文、回ってない様子。
+		for header in data:
+			print(header)
+		print("「csv読み込み関数」から読み込んだリストを返します" )
+		return header
 
 
 
@@ -32,9 +37,10 @@ def write_source(source):
 
 
 
-### 検索ツール。引数（検索する配列）
-# 入力値が見つかった return = ""
-# 入力値が見つからない return = 入力された名前
+### 検索ツール。
+# 引数（検索する配列: list）
+# 戻り値、入力名が見つかった return = ""
+# 戻り値、入力名が見つからない return = 入力された名前
 def search(source):
 	word =input("鬼滅の登場人物の名前を入力してください >>> ")
 
@@ -52,13 +58,15 @@ def search(source):
 ## メインの処理
 if __name__ == "__main__":
 	
-	# csvファイルを読み込んで、配列をsource_list に入れる
+	# csvファイルを読み込む関数、戻り値（配列）をsource_list に入れる
 	source_list = read_source()
 
 	print("渡したリスト中から入力した名前を検索する関数を呼び出します")
 	input_name = search( source_list )
 
 	if input_name != "":
+		# 入力された名前が見つからなかった場合、、、
+
 		rst = input(input_name + "を登場人物リストに追加しますか？(y/n)：")
 		if rst == "y":
 			source_list.append( input_name )
@@ -67,9 +75,6 @@ if __name__ == "__main__":
 		else:
 			# 入力されたy 以外の判定はとりあえずしない
 			pass
-
-	# print("現在の登場人物リスト")
-	# print(source_list)
 
 
 
